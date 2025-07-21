@@ -1,0 +1,73 @@
+// src/sections/Servicios/Servicios.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.servicios {
+  padding: 10rem 0;
+  background-color: $white;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 8rem;
+  }
+
+  &__subtitle {
+    font-family: $font-primary;
+    font-size: 1.8rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    color: $black;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    margin-bottom: 4rem;
+    color: $black;
+    padding: 1.5rem 4rem;
+    border: 2px solid $black;
+    border-radius: 50px;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+
+  &__line {
+    width: 100%;
+    max-width: 1400px;
+    height: 3px;
+    background-color: map-get($colors, 'hope');
+    margin: 0 auto;
+    transform-origin: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 8rem;
+
+    @include responsive(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    @include responsive(mobile) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  &__card-wrapper {
+    height: 100%;
+  }
+}

@@ -1,0 +1,245 @@
+// src/components/CategoryModal/CategoryModal.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.category-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+
+  &__content {
+    background-color: $white;
+    max-width: 1400px;
+    width: 100%;
+    max-height: 90vh;
+    position: relative;
+    overflow: hidden;
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  &__close {
+    position: absolute;
+    top: 3rem;
+    right: 3rem; // Movido a la derecha
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 4rem;
+    line-height: 1;
+    color: $black;
+    padding: 0;
+    font-weight: 300;
+    transition: all $transition-base;
+
+    &:hover {
+      transform: scale(1.2) rotate(90deg);
+      color: map-get($colors, 'hope');
+    }
+  }
+
+  &__header {
+    padding: 3rem 6rem 0;
+    
+    @include responsive(mobile) {
+      padding: 3rem 3rem 0;
+    }
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__icon {
+    width: 50px; // Logo más grande
+    height: 50px;
+    object-fit: contain;
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: 1.4rem;
+    font-weight: map-get($visby-weights, 'regular');
+    color: $black;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 2px solid $black;
+    border-radius: 30px;
+    padding: 0.8rem 2.5rem;
+    display: inline-block;
+  }
+
+  &__line {
+    width: 100%;
+    height: 3px;
+    background-color: map-get($colors, 'hope');
+    margin-bottom: 3rem;
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    height: calc(90vh - 150px);
+    
+    @include responsive(tablet) {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+  }
+
+  &__foundations-wrapper {
+    padding: 0 6rem 4rem;
+    position: relative;
+    
+    @include responsive(tablet) {
+      padding: 0 3rem 3rem;
+    }
+  }
+
+  &__foundations {
+    overflow-y: auto;
+    max-height: calc(90vh - 250px);
+    padding-right: 2rem;
+    
+    // Scroll elegante
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba($chrome-white, 0.3);
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $chrome-white;
+      border-radius: 3px;
+      transition: background $transition-base;
+      
+      &:hover {
+        background: darken($chrome-white, 10%);
+      }
+    }
+
+    // Firefox
+    scrollbar-width: thin;
+    scrollbar-color: $chrome-white rgba($chrome-white, 0.3);
+    
+    @include responsive(tablet) {
+      max-height: 300px;
+    }
+  }
+
+  &__foundation {
+    font-family: $font-primary;
+    font-size: 1.4rem;
+    font-weight: map-get($visby-weights, 'regular');
+    color: $black;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+    padding-left: 1rem;
+    position: relative;
+    transition: all $transition-base;
+
+    // Bullet point sutil
+    &::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: $chrome-white;
+    }
+
+    &:hover {
+      color: map-get($colors, 'hope');
+      transform: translateX(5px);
+    }
+  }
+
+  &__image-wrapper {
+    padding: 0 4rem 4rem 0;
+    height: 100%;
+    
+    @include responsive(tablet) {
+      padding: 0 3rem 3rem;
+      height: 400px;
+    }
+  }
+
+  &__image {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: $radius-sm;
+    
+    // Marco sutil y minimalista
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba($black, 0.1);
+      border-radius: $radius-sm;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform $transition-slow;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // Color variations for the line based on category
+  &[data-category="salud"] .category-modal__line {
+    background-color: map-get($colors, 'hope');
+  }
+  
+  &[data-category="educacion"] .category-modal__line {
+    background-color: map-get($colors, 'here');
+  }
+  
+  &[data-category="vulnerabilidad"] .category-modal__line {
+    background-color: map-get($colors, 'here');
+  }
+  
+  &[data-category="violencia"] .category-modal__line {
+    background-color: map-get($colors, 'halo');
+  }
+  
+  &[data-category="medioambiente"] .category-modal__line {
+    background-color: map-get($colors, 'hits');
+  }
+  
+  &[data-category="desastres"] .category-modal__line {
+    background-color: map-get($colors, 'home');
+  }
+  
+  &[data-category="arte"] .category-modal__line {
+    background-color: map-get($colors, 'hook');
+  }
+  
+  &[data-category="grupos"] .category-modal__line {
+    background-color: map-get($colors, 'here');
+  }
+}

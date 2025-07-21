@@ -1,0 +1,154 @@
+// src/sections/Fundaciones/Fundaciones.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.fundaciones {
+  padding: 10rem 0;
+  background-color: $white;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    margin-bottom: 4rem;
+    color: $black;
+    padding: 1.5rem 4rem;
+    border: 2px solid $black;
+    border-radius: 50px;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+
+  &__line {
+    width: 100%;
+    max-width: 1400px;
+    height: 3px;
+    background-color: map-get($colors, 'hope');
+    margin: 0 auto;
+    transform-origin: center;
+  }
+
+  &__content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  &__grid {
+    margin-bottom: 6rem;
+  }
+
+  &__row {
+    width: 100%;
+    margin-bottom: 2rem;
+    opacity: 0;
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__counter-wrapper {
+    text-align: center;
+    margin: 8rem 0;
+  }
+
+  &__counter {
+    font-family: $font-primary;
+    font-size: clamp(5rem, 8vw, 8rem);
+    font-weight: map-get($visby-weights, 'bold');
+    color: $black;
+    display: block;
+    line-height: 1;
+  }
+
+  &__counter-text {
+    font-family: $font-primary;
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: $black;
+    margin-top: 1rem;
+    text-transform: uppercase;
+  }
+
+  &__categories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4rem 3rem;
+    margin-top: 6rem;
+
+    @include responsive(tablet) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    @include responsive(mobile) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  &__category {
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: transform $transition-base;
+    opacity: 0;
+    transform: scale(0.8);
+
+    &:hover {
+      transform: translateY(-10px);
+
+      .fundaciones__category-icon {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__category-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      transition: transform $transition-base;
+    }
+  }
+
+  &__category-label {
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    font-weight: map-get($visby-weights, 'regular');
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: $black;
+    line-height: 1.4;
+    max-width: 150px;
+    margin: 0 auto;
+  }
+}

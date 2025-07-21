@@ -1,0 +1,62 @@
+// src/sections/Proyectos/Proyectos.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.proyectos {
+  padding: 10rem 0;
+  background-color: $orchid-white;
+  position: relative;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    margin-bottom: 3rem;
+    color: $black;
+    
+    // Border styling to match design
+    padding: 2rem 4rem;
+    border: 2px solid $black;
+    border-radius: 50px;
+    display: inline-block;
+  }
+
+  &__line {
+    width: 100%;
+    max-width: 1200px;
+    height: 3px;
+    background-color: map-get($colors, 'hope');
+    margin: 0 auto;
+    transform-origin: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    
+    @include responsive(tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include responsive(mobile) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  &__item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+  }
+}

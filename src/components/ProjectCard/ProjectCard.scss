@@ -1,0 +1,67 @@
+// src/components/ProjectCard/ProjectCard.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.project-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: $black;
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-slow, filter $transition-base;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  &__content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 3rem;
+    transform: translateY(100%);
+    transition: transform $transition-base;
+  }
+
+  &__name {
+    font-family: $font-primary;
+    font-size: 3rem;
+    font-weight: map-get($visby-weights, 'bold');
+    color: $white;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    .project-card__image {
+      transform: scale(1.1);
+      filter: brightness(0.7);
+    }
+
+    .project-card__overlay {
+      opacity: 1;
+    }
+
+    .project-card__content {
+      transform: translateY(0);
+    }
+  }
+}

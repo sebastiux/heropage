@@ -1,5 +1,6 @@
 // src/assets/images/projects/index.js
 // Project images
+/*
 import projectAlsea from './project-alsea.jpg';
 import projectShein from './project-shein.jpg';
 import projectZurich from './project-zurich.jpg';
@@ -29,3 +30,4 @@ export {
   projectXiaomiThumb,
   projectEsteeLauderThumb
 };
+*/

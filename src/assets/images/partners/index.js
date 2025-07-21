@@ -1,5 +1,7 @@
 // src/assets/images/partners/index.js
 // Import all partner logos
+
+/*
 import partnerKiehls from './partner-kiehls.svg';
 import partnerCasaDragones from './partner-casa-dragones.svg';
 import partnerBerger from './partner-berger.svg';
@@ -25,3 +27,4 @@ export {
   partnerZurich,
   partnerSantander
 };
+*/
