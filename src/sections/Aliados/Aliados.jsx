@@ -3,70 +3,135 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../../contexts/LanguageContext';
+import {
+  kiehls,
+  casaDragones,
+  berger,
+  creed,
+  porsche,
+  nespresso,
+  joMalone,
+  macallan,
+  volkswagenLogoNegro,
+  zurichSantander
+} from '../../assets/images';
 import './Aliados.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const partners = [
-  // Row 1
-  ["Kiehl's", 'Casa Dragones', 'Berger', 'Creed', 'Porsche', 'Nespresso'],
-  // Row 2
-  ['Jo Malone', 'Macallan', 'Volkswagen', 'Zurich', 'Santander']
-];
-
 const Aliados = () => {
   const { t } = useLanguage();
   const sectionRef = useRef(null);
-  const logosRef = useRef([]);
+  const titleRef = useRef(null);
+  const row1Ref = useRef(null);
+  const row2Ref = useRef(null);
+
+  const partners = [
+    // Row 1 - 6 logos
+    [
+      { name: "Kiehl's", logo: kiehls },
+      { name: 'Casa Dragones', logo: casaDragones },
+      { name: 'Berger', logo: berger },
+      { name: 'Creed', logo: creed },
+      { name: 'Porsche', logo: porsche },
+      { name: 'Nespresso', logo: nespresso }
+    ],
+    // Row 2 - 4 logos (Zurich & Santander combined)
+    [
+      { name: 'Jo Malone', logo: joMalone },
+      { name: 'Macallan', logo: macallan },
+      { name: 'Volkswagen', logo: volkswagenLogoNegro },
+      { name: 'Zurich Santander', logo: zurichSantander, isDouble: true }
+    ]
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate partner logos with hover effect
-      gsap.fromTo('.aliados__logo',
+      // Title animation - subtle fade in
+      gsap.fromTo(titleRef.current,
         { 
           opacity: 0,
-          scale: 0,
-          rotation: -180
+          y: 30
         },
         {
           opacity: 1,
-          scale: 1,
-          rotation: 0,
-          duration: 1,
-          stagger: {
-            amount: 1.5,
-            from: 'center',
-            grid: 'auto'
-          },
-          ease: 'back.out(1.7)',
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
           scrollTrigger: {
-            trigger: '.aliados__grid',
-            start: 'top 80%'
+            trigger: titleRef.current,
+            start: 'top 80%',
           }
         }
       );
 
-      // Add hover animations
-      logosRef.current.forEach(logo => {
-        if (logo) {
-          logo.addEventListener('mouseenter', () => {
-            gsap.to(logo, {
-              scale: 1.1,
-              rotation: 5,
-              duration: 0.3,
-              ease: 'power2.out'
-            });
-          });
-
-          logo.addEventListener('mouseleave', () => {
-            gsap.to(logo, {
-              scale: 1,
-              rotation: 0,
-              duration: 0.3,
-              ease: 'power2.out'
-            });
-          });
+      // Row 1 animation
+      gsap.fromTo('.aliados__row--1 .aliados__logo',
+        { 
+          opacity: 0,
+          y: 20
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: row1Ref.current,
+            start: 'top 80%',
+          }
         }
+      );
+
+      // Row 2 animation - slight delay after row 1
+      gsap.fromTo('.aliados__row--2 .aliados__logo',
+        { 
+          opacity: 0,
+          y: 20
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          delay: 0.2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: row2Ref.current,
+            start: 'top 80%',
+          }
+        }
+      );
+
+      // Subtle hover effects
+      const logos = gsap.utils.toArray('.aliados__logo');
+      logos.forEach(logo => {
+        logo.addEventListener('mouseenter', () => {
+          gsap.to(logo, {
+            y: -5,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(logo.querySelector('img'), {
+            filter: 'grayscale(0%)',
+            opacity: 1,
+            duration: 0.3
+          });
+        });
+
+        logo.addEventListener('mouseleave', () => {
+          gsap.to(logo, {
+            y: 0,
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+          gsap.to(logo.querySelector('img'), {
+            filter: 'grayscale(100%)',
+            opacity: 0.6,
+            duration: 0.3
+          });
+        });
       });
     }, sectionRef);
 
@@ -77,19 +142,25 @@ const Aliados = () => {
     <section className="aliados" id="aliados" ref={sectionRef}>
       <div className="container">
         <div className="aliados__header">
-          <h2 className="aliados__title">NUESTROS ALIADOS</h2>
+          <h2 className="aliados__title" ref={titleRef}>
+            {t('aliados.title') || 'NUESTROS ALIADOS'}
+          </h2>
         </div>
 
         <div className="aliados__grid">
           {partners.map((row, rowIndex) => (
-            <div key={rowIndex} className="aliados__row">
+            <div 
+              key={rowIndex} 
+              className={`aliados__row aliados__row--${rowIndex + 1}`}
+              ref={rowIndex === 0 ? row1Ref : row2Ref}
+            >
               {row.map((partner, index) => (
                 <div
-                  key={partner}
-                  className="aliados__logo"
-                  ref={el => logosRef.current[rowIndex * row.length + index] = el}
+                  key={partner.name}
+                  className={`aliados__logo ${partner.isDouble ? 'aliados__logo--double' : ''}`}
+                  data-partner={partner.name}
                 >
-                  <img src={`/placeholder-logo.png`} alt={partner} />
+                  <img src={partner.logo} alt={partner.name} />
                 </div>
               ))}
             </div>

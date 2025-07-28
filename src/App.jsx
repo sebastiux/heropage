@@ -6,7 +6,7 @@ import Hero from './sections/Hero';
 import Servicios from './sections/Servicios';
 import Fundaciones from './sections/Fundaciones';
 import Proyectos from './sections/Proyectos';
-//import Aliados from './sections/Aliados';
+import Aliados from './sections/Aliados'; // Uncomment this
 //import Footer from './sections/Footer';
 import './App.scss';
 
@@ -20,7 +20,7 @@ function App() {
           <Servicios />
           <Fundaciones />
           <Proyectos />
-    
+          <Aliados /> {/* Add this */}
         </main>
       </div>
     </LanguageProvider>

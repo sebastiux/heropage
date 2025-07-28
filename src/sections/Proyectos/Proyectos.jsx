@@ -21,12 +21,14 @@ const Proyectos = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const carouselRef = useRef(null);
+  const portfolioRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  // Proyectos como en Canva - 6 proyectos
+  // Proyectos data
   const projects = [
     {
       id: 1,
@@ -83,7 +85,7 @@ const Proyectos = () => {
     {
       id: 5,
       name: 'xiaomi',
-      image: projectAlsea2, // Placeholder hasta tener imagen de Xiaomi
+      image: projectAlsea2,
       challenge: 'Democratizar el acceso a la tecnología en comunidades marginadas.',
       solution: 'Implementamos centros de tecnología comunitarios con capacitación digital.',
       impact: [
@@ -96,7 +98,7 @@ const Proyectos = () => {
     {
       id: 6,
       name: 'ESTÉE LAUDER',
-      image: projectShein2, // Placeholder hasta tener imagen de Estée Lauder
+      image: projectShein2,
       challenge: 'Apoyar a mujeres en situación vulnerable a través del empoderamiento.',
       solution: 'Creamos un programa de capacitación en belleza y emprendimiento.',
       impact: [
@@ -152,6 +154,23 @@ const Proyectos = () => {
           }
         }
       );
+
+      // Portfolio items animation
+      gsap.fromTo('.proyectos__item',
+        { opacity: 0, scale: 0.9 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power3.out',
+          delay: 0.8,
+          scrollTrigger: {
+            trigger: '.proyectos__portfolio',
+            start: 'top 80%'
+          }
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -169,24 +188,36 @@ const Proyectos = () => {
   }, [currentSlide, isPaused, isModalOpen]);
 
   const handleNext = () => {
+    if (isAnimating) return;
     animateSlide((currentSlide + 1) % Math.ceil(projects.length / 6));
   };
 
   const handlePrev = () => {
+    if (isAnimating) return;
     const totalSlides = Math.ceil(projects.length / 6);
     animateSlide(currentSlide === 0 ? totalSlides - 1 : currentSlide - 1);
   };
 
   const animateSlide = (newSlide) => {
-    gsap.to('.proyectos__grid', {
+    setIsAnimating(true);
+    
+    gsap.to('.proyectos__item', {
       opacity: 0,
-      x: -50,
+      scale: 0.95,
       duration: 0.3,
+      stagger: 0.05,
       onComplete: () => {
         setCurrentSlide(newSlide);
-        gsap.fromTo('.proyectos__grid',
-          { opacity: 0, x: 50 },
-          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' }
+        gsap.fromTo('.proyectos__item',
+          { opacity: 0, scale: 0.95 },
+          { 
+            opacity: 1, 
+            scale: 1, 
+            duration: 0.4, 
+            stagger: 0.05,
+            ease: 'power2.out',
+            onComplete: () => setIsAnimating(false)
+          }
         );
       }
     });
@@ -211,7 +242,7 @@ const Proyectos = () => {
     <section className="proyectos" id="proyectos" ref={sectionRef}>
       <div className="container">
         <div className="proyectos__header">
-          <h2 className="proyectos__title" ref={titleRef}>{t('proyectos.title')}</h2>
+          <h2 className="proyectos__title" ref={titleRef}>PROYECTOS</h2>
           <div className="proyectos__line"></div>
         </div>
 
@@ -221,29 +252,39 @@ const Proyectos = () => {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="proyectos__grid">
-            {getVisibleProjects().map((project) => (
-              <div
-                key={project.id}
-                className="proyectos__item"
-                onClick={() => handleProjectClick(project)}
-              >
-                <img 
-                  src={project.image} 
-                  alt={project.name}
-                  className="proyectos__image"
-                />
-                <div className="proyectos__overlay">
-                  <h3 className="proyectos__name">{project.name}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
+<div 
+  ref={portfolioRef}
+  className="proyectos__portfolio"
+>
+  {getVisibleProjects().map((project) => (
+    <div
+      key={project.id}
+      className="proyectos__item"
+      onClick={() => handleProjectClick(project)}
+    >
+      <img 
+        src={project.image} 
+        alt={project.name}
+        className="proyectos__image"
+      />
+      <div className="proyectos__info">
+        <span className="proyectos__tag">{project.name}</span>
+        {project.tags && project.tags[0] && (
+          <span className="proyectos__tag proyectos__tag--category">{project.tags[0]}</span>
+        )}
+      </div>
+      <div className="proyectos__overlay">
+        <h3 className="proyectos__name">{project.name}</h3>
+      </div>
+    </div>
+  ))}
+</div>
 
           {/* Navigation arrows */}
           <button 
-            className="proyectos__nav proyectos__nav--prev"
+            className={`proyectos__nav proyectos__nav--prev ${isAnimating ? 'disabled' : ''}`}
             onClick={handlePrev}
+            disabled={isAnimating}
             aria-label="Previous"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -251,8 +292,9 @@ const Proyectos = () => {
             </svg>
           </button>
           <button 
-            className="proyectos__nav proyectos__nav--next"
+            className={`proyectos__nav proyectos__nav--next ${isAnimating ? 'disabled' : ''}`}
             onClick={handleNext}
+            disabled={isAnimating}
             aria-label="Next"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -262,11 +304,13 @@ const Proyectos = () => {
         </div>
       </div>
 
-      <ProjectModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-      />
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
+      )}
     </section>
   );
 };

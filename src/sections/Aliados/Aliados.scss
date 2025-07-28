@@ -18,6 +18,7 @@
     font-weight: 300;
     letter-spacing: 0.1em;
     color: $black;
+    text-transform: uppercase;
     
     // Border styling to match design
     padding: 2rem 4rem;
@@ -36,16 +37,36 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 5rem;
     margin-bottom: 4rem;
 
-    @include responsive(tablet) {
-      gap: 3rem;
+    &:last-child {
+      margin-bottom: 0;
     }
 
-    @include responsive(mobile) {
-      gap: 2rem;
-      margin-bottom: 3rem;
+    // Row 1 - 6 logos evenly spaced
+    &--1 {
+      gap: 5rem;
+
+      @include responsive(tablet) {
+        gap: 3rem;
+      }
+
+      @include responsive(mobile) {
+        gap: 2rem;
+      }
+    }
+
+    // Row 2 - 4 items (last one is double width)
+    &--2 {
+      gap: 5rem;
+
+      @include responsive(tablet) {
+        gap: 3rem;
+      }
+
+      @include responsive(mobile) {
+        gap: 2rem;
+      }
     }
   }
 
@@ -55,26 +76,46 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: all $transition-base;
     cursor: pointer;
-
-    &:hover {
-      filter: grayscale(0%);
-      opacity: 1;
-      transform: scale(1.1) rotate(5deg);
-    }
-
+    transition: transform $transition-base;
+    
     img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.6;
+      transition: all $transition-base;
+    }
+
+    &:hover {
+      img {
+        filter: grayscale(0%);
+        opacity: 1;
+      }
+    }
+
+    // Double width for Zurich & Santander
+    &--double {
+      width: 300px;
+
+      @include responsive(tablet) {
+        width: 240px;
+      }
+
+      @include responsive(mobile) {
+        width: 200px;
+      }
+    }
+
+    @include responsive(tablet) {
+      width: 120px;
+      height: 60px;
     }
 
     @include responsive(mobile) {
-      width: 120px;
-      height: 60px;
+      width: 100px;
+      height: 50px;
     }
   }
 }

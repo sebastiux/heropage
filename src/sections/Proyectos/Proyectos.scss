@@ -4,7 +4,7 @@
 
 .proyectos {
   padding: 10rem 0;
-  background-color: $white; // Fondo blanco
+  background-color: $white;
   position: relative;
 
   &__header {
@@ -20,7 +20,6 @@
     margin-bottom: 3rem;
     color: $black;
     
-    // Border styling to match design
     padding: 2rem 4rem;
     border: 2px solid $black;
     border-radius: 50px;
@@ -40,73 +39,159 @@
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 5rem;
+    padding: 0 8rem;
     opacity: 0;
 
     @include responsive(tablet) {
-      padding: 0 3rem;
+      padding: 0 6rem;
     }
 
     @include responsive(mobile) {
-      padding: 0 1rem;
+      padding: 0 4rem;
     }
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 1.5rem;
+  // SOLUCIÓN: Una sola fila con flexbox
+  &__portfolio {
+    display: flex;
+    width: 100%;
+    height: 400px; // Altura fija para la fila
     
+    @include responsive(desktop) {
+      height: 350px;
+    }
+
     @include responsive(tablet) {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
+      height: 300px;
     }
 
     @include responsive(mobile) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      height: 250px;
     }
   }
 
+  // Cada item ocupa exactamente 1/6 del ancho
   &__item {
     position: relative;
-    overflow: hidden;
-    aspect-ratio: 3/4; // Formato vertical rectangular
     cursor: pointer;
-    border-radius: $radius-sm;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: all $transition-base;
-    background-color: $black;
+    overflow: hidden;
+    transition: transform $transition-base;
+    opacity: 0;
+    transform: scale(0.9);
+    
+    // CLAVE: Flex para una sola fila
+    flex: 1; // Cada item ocupa el mismo espacio
+    width: calc(100% / 6); // Exactamente 1/6
+    height: 100%; // Ocupa toda la altura del contenedor
+    
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    
+    @include responsive(desktop) {
+      width: calc(100% / 4);
+    }
+
+    @include responsive(tablet) {
+      width: calc(100% / 3);
+    }
+
+    @include responsive(mobile) {
+      width: calc(100% / 2);
+    }
     
     &:hover {
+      z-index: 2;
       transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+      .proyectos__image {
+        transform: scale(1.05);
+      }
 
       .proyectos__overlay {
         opacity: 1;
       }
 
-      .proyectos__image {
-        transform: scale(1.05);
-        filter: brightness(0.8);
+      .proyectos__info {
+        opacity: 0;
       }
     }
 
-    @include responsive(tablet) {
-      aspect-ratio: 3/4.5; // Un poco más alto en tablet
-    }
-
     @include responsive(mobile) {
-      aspect-ratio: 2/3; // Más cuadrado en móvil
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
   }
 
+  // La imagen llena completamente su contenedor
   &__image {
     width: 100%;
     height: 100%;
+    
+    // SOLUCIÓN: object-fit cover para llenar sin distorsión
     object-fit: cover;
     object-position: center;
-    transition: all $transition-slow;
+    
+    transition: transform $transition-slow;
+    display: block;
+    
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+  }
+
+  &__info {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    z-index: 3;
+    transition: opacity $transition-base;
+
+    @include responsive(mobile) {
+      top: 15px;
+      left: 15px;
+      gap: 6px;
+    }
+  }
+
+  &__tag {
+    font-family: $font-primary;
+    font-size: 0.75rem;
+    font-weight: map-get($visby-weights, 'demi-bold');
+    color: $black;
+    background-color: $white;
+    padding: 8px 15px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all $transition-base;
+    margin: 0;
+    border: none;
+
+    &--category {
+      background-color: rgba(map-get($colors, 'hope'), 0.9);
+      color: $black;
+    }
+
+    &:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.05);
+    }
+
+    @include responsive(mobile) {
+      font-size: 0.65rem;
+      padding: 5px 10px;
+    }
   }
 
   &__overlay {
@@ -124,14 +209,19 @@
     opacity: 0;
     transition: opacity $transition-base;
 
-    @include responsive(mobile) {
+    @include responsive(tablet) {
       padding: 1.5rem;
+    }
+
+    @include responsive(mobile) {
+      padding: 1.2rem;
+      opacity: 0;
     }
   }
 
   &__name {
     font-family: $font-primary;
-    font-size: clamp(1.6rem, 2vw, 2.2rem);
+    font-size: clamp(1.4rem, 1.8vw, 2.2rem);
     font-weight: map-get($visby-weights, 'bold');
     color: $white;
     letter-spacing: 0.05em;
@@ -139,9 +229,11 @@
     text-align: left;
     line-height: 1.2;
     width: 100%;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 
     @include responsive(mobile) {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
+      text-align: center;
     }
   }
 
@@ -150,8 +242,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     background-color: $white;
     border: 2px solid $chrome-white;
     border-radius: 50%;
@@ -160,53 +252,80 @@
     z-index: 10;
     @include flex-center;
     color: $black;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 
     svg {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
     }
 
-    &:hover {
+    &:hover:not(.disabled) {
       background-color: $black;
       border-color: $black;
       color: $white;
       transform: translateY(-50%) scale(1.1);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      
+      &:hover {
+        transform: translateY(-50%);
+        background-color: $white;
+        color: $black;
+      }
     }
 
     &--prev {
-      left: 0;
+      left: 2rem;
 
       @include responsive(tablet) {
-        left: 1rem;
+        left: 1.5rem;
       }
 
       @include responsive(mobile) {
-        left: 0.5rem;
+        left: 1rem;
+        width: 50px;
+        height: 50px;
+        
+        svg {
+          width: 24px;
+          height: 24px;
+        }
       }
     }
 
     &--next {
-      right: 0;
+      right: 2rem;
 
       @include responsive(tablet) {
-        right: 1rem;
+        right: 1.5rem;
       }
 
       @include responsive(mobile) {
-        right: 0.5rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+        
+        svg {
+          width: 24px;
+          height: 24px;
+        }
       }
     }
+  }
 
-    @include responsive(mobile) {
-      width: 40px;
-      height: 40px;
+  @include responsive(mobile) {
+    padding: 8rem 0;
 
-      svg {
-        width: 20px;
-        height: 20px;
-      }
+    &__header {
+      margin-bottom: 4rem;
+    }
+
+    &__title {
+      padding: 1.5rem 3rem;
     }
   }
 }
