@@ -8,12 +8,18 @@
   height: 100%;
   overflow: hidden;
   background-color: $black;
+  cursor: pointer;
+  
+  // Remove default button styles if any
+  @include button-reset;
 
   &__image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform $transition-slow, filter $transition-base;
+    transform: scale(1);
+    display: block;
   }
 
   &__overlay {
@@ -24,11 +30,13 @@
     height: 100%;
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.2) 0%,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.7) 70%,
       rgba(0, 0, 0, 0.8) 100%
     );
     opacity: 0;
     transition: opacity $transition-base;
+    pointer-events: none;
   }
 
   &__content {
@@ -39,21 +47,43 @@
     padding: 3rem;
     transform: translateY(100%);
     transition: transform $transition-base;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+    @include responsive(tablet) {
+      padding: 2.5rem;
+    }
+
+    @include responsive(mobile) {
+      padding: 2rem;
+    }
   }
 
   &__name {
     font-family: $font-primary;
-    font-size: 3rem;
+    font-size: clamp(2rem, 3vw, 3rem);
     font-weight: map-get($visby-weights, 'bold');
     color: $white;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    line-height: 1.2;
+
+    @include responsive(mobile) {
+      font-size: 1.8rem;
+    }
   }
 
+  // Hover states - these will be controlled by JS but good to have as fallback
   &:hover {
     .project-card__image {
       transform: scale(1.1);
-      filter: brightness(0.7);
+      filter: brightness(0.8);
     }
 
     .project-card__overlay {
@@ -62,6 +92,101 @@
 
     .project-card__content {
       transform: translateY(0);
+    }
+  }
+
+  // Active state for click feedback
+  &:active {
+    transform: scale(0.98);
+  }
+
+  // Focus state for accessibility
+  &:focus {
+    outline: 2px solid map-get($colors, 'hope');
+    outline-offset: -2px;
+  }
+
+  // For mobile, show the content by default
+  @include responsive(mobile) {
+    .project-card__overlay {
+      opacity: 0.5;
+    }
+
+    .project-card__content {
+      transform: translateY(0);
+      padding: 1.5rem;
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+
+    .project-card__name {
+      font-size: 1.6rem;
+    }
+
+    // Disable hover effects on mobile
+    &:hover {
+      .project-card__image {
+        transform: scale(1);
+        filter: none;
+      }
+    }
+  }
+
+  // Loading state
+  &.loading {
+    .project-card__image {
+      opacity: 0;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        rgba($chrome-white, 0.1) 0%,
+        rgba($chrome-white, 0.2) 50%,
+        rgba($chrome-white, 0.1) 100%
+      );
+      animation: shimmer 1.5s infinite;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+// Additional styles for when used in a grid
+.proyectos__grid {
+  .project-card {
+    // Ensure proper sizing in grid
+    width: 100%;
+    height: 100%;
+    
+    // Add subtle border between items
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border: 1px solid rgba($white, 0.1);
+      pointer-events: none;
+      z-index: 1;
     }
   }
 }

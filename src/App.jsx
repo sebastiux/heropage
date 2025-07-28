@@ -5,6 +5,9 @@ import Navbar from './components/Navbar';
 import Hero from './sections/Hero';
 import Servicios from './sections/Servicios';
 import Fundaciones from './sections/Fundaciones';
+import Proyectos from './sections/Proyectos';
+//import Aliados from './sections/Aliados';
+//import Footer from './sections/Footer';
 import './App.scss';
 
 function App() {
@@ -16,6 +19,8 @@ function App() {
           <Hero />
           <Servicios />
           <Fundaciones />
+          <Proyectos />
+    
         </main>
       </div>
     </LanguageProvider>

@@ -1,33 +1,55 @@
 // src/assets/images/projects/index.js
-// Project images
-/*
-import projectAlsea from './project-alsea.jpg';
-import projectShein from './project-shein.jpg';
-import projectZurich from './project-zurich.jpg';
-import projectVolkswagen from './project-volkswagen.jpg';
-import projectXiaomi from './project-xiaomi.jpg';
-import projectEsteeLauder from './project-estee-lauder.jpg';
 
-// Project thumbnails
-import projectAlseaThumb from './project-alsea-thumb.jpg';
-import projectSheinThumb from './project-shein-thumb.jpg';
-import projectZurichThumb from './project-zurich-thumb.jpg';
-import projectVolkswagenThumb from './project-volkswagen-thumb.jpg';
-import projectXiaomiThumb from './project-xiaomi-thumb.jpg';
-import projectEsteeLauderThumb from './project-estee-lauder-thumb.jpg';
+// Alsea project images
+import projectAlsea1 from './ALSEA1.png';
+import projectAlsea2 from './ALSEA2.png';
+import projectAlsea3 from './ALSEA3.png';
+import projectAlsea4 from './Alsea4.png';
 
+// SHEIN project images
+import projectShein from './SHEIN_Proyectos.png';
+import projectShein1 from './SHEIN1.png';
+import projectShein2 from './SHEIN2.png';
+import projectShein3 from './Shein3.png';
+import projectShein4 from './SHEIN4.png';
+
+// Volkswagen project images
+import projectVolkswagen1 from './VOLKSWAGEN1.png';
+import projectVolkswagen2 from './VOLKSWAGEN2.png';
+import projectVolkswagen3 from './VOLKSWAGEN3.png';
+import projectVolkswagen4 from './VOLKSWAGEN4.png';
+import projectVolkswagen5 from './VOLKSWAGEN5.png';
+
+// Zurich project images
+import projectZurich1 from './Zurich1.jpg';
+import projectZurich3 from './Zurich3.jpg';
+import projectZurich4 from './Zurich4.jpg';
+import projectZurich5 from './Zurich5.jpg';
+
+
+
+// Export all images for potential gallery use
 export {
-  projectAlsea,
-  projectShein,
-  projectZurich,
-  projectVolkswagen,
-  projectXiaomi,
-  projectEsteeLauder,
-  projectAlseaThumb,
-  projectSheinThumb,
-  projectZurichThumb,
-  projectVolkswagenThumb,
-  projectXiaomiThumb,
-  projectEsteeLauderThumb
+  projectAlsea1,
+  projectAlsea2,
+  projectAlsea3,
+  projectAlsea4,
+  projectShein1,
+  projectShein2,
+  projectShein3,
+  projectShein4,
+  projectVolkswagen1,
+  projectVolkswagen2,
+  projectVolkswagen3,
+  projectVolkswagen4,
+  projectVolkswagen5,
+  projectZurich1,
+  projectZurich3,
+  projectZurich4,
+  projectZurich5
 };
-*/
+
+// Since you don't have Xiaomi and Estée Lauder images yet, 
+// you can add placeholder exports or comment these out
+//export const projectXiaomi = projectAlsea1; // placeholder
+//export const projectEsteeLauder = projectShein; // placeholder

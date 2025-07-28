@@ -4,7 +4,7 @@
 
 .proyectos {
   padding: 10rem 0;
-  background-color: $orchid-white;
+  background-color: $white; // Fondo blanco
   position: relative;
 
   &__header {
@@ -36,27 +36,177 @@
     transform-origin: center;
   }
 
-  &__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
+  &__carousel {
+    position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    
+    padding: 0 5rem;
+    opacity: 0;
+
     @include responsive(tablet) {
-      grid-template-columns: repeat(2, 1fr);
+      padding: 0 3rem;
     }
 
     @include responsive(mobile) {
-      grid-template-columns: 1fr;
-      gap: 2rem;
+      padding: 0 1rem;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.5rem;
+    
+    @include responsive(tablet) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    @include responsive(mobile) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
     }
   }
 
   &__item {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 4/3;
+    aspect-ratio: 3/4; // Formato vertical rectangular
     cursor: pointer;
+    border-radius: $radius-sm;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all $transition-base;
+    background-color: $black;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+      .proyectos__overlay {
+        opacity: 1;
+      }
+
+      .proyectos__image {
+        transform: scale(1.05);
+        filter: brightness(0.8);
+      }
+    }
+
+    @include responsive(tablet) {
+      aspect-ratio: 3/4.5; // Un poco más alto en tablet
+    }
+
+    @include responsive(mobile) {
+      aspect-ratio: 2/3; // Más cuadrado en móvil
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: all $transition-slow;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.8) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity $transition-base;
+
+    @include responsive(mobile) {
+      padding: 1.5rem;
+    }
+  }
+
+  &__name {
+    font-family: $font-primary;
+    font-size: clamp(1.6rem, 2vw, 2.2rem);
+    font-weight: map-get($visby-weights, 'bold');
+    color: $white;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: left;
+    line-height: 1.2;
+    width: 100%;
+
+    @include responsive(mobile) {
+      font-size: 1.4rem;
+    }
+  }
+
+  // Navigation arrows
+  &__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background-color: $white;
+    border: 2px solid $chrome-white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all $transition-base;
+    z-index: 10;
+    @include flex-center;
+    color: $black;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    &:hover {
+      background-color: $black;
+      border-color: $black;
+      color: $white;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    &--prev {
+      left: 0;
+
+      @include responsive(tablet) {
+        left: 1rem;
+      }
+
+      @include responsive(mobile) {
+        left: 0.5rem;
+      }
+    }
+
+    &--next {
+      right: 0;
+
+      @include responsive(tablet) {
+        right: 1rem;
+      }
+
+      @include responsive(mobile) {
+        right: 0.5rem;
+      }
+    }
+
+    @include responsive(mobile) {
+      width: 40px;
+      height: 40px;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
   }
 }
