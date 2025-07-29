@@ -6,12 +6,38 @@ import { useLanguage } from '../../contexts/LanguageContext';
 import ProjectModal from '../../components/ProjectModal';
 import {
   projectAlsea1,
-  projectShein1,
-  projectZurich1,
-  projectVolkswagen1,
   projectAlsea2,
-  projectShein2
+  projectAlsea3,
+  projectAlsea4,
+  projectShein1,
+  projectShein2,
+  projectShein3,
+  projectShein4,
+  projectVolkswagen1,
+  projectVolkswagen2,
+  projectVolkswagen3,
+  projectVolkswagen4,
+  projectVolkswagen5,
+  projectZurich1,
+  projectZurich3,
+  projectZurich4,
+  projectZurich5
 } from '../../assets/images/projects';
+// Import white logos from your existing imports
+import {
+  alseaLogoBlanco,
+  sheinLogoBlanco,
+  zurichLogoBlanco,
+  volkswagenLogoBlanco,
+  xiaomiLogoBlanco,
+  esteeLauderLogoBlanco,
+  alseaLogoNegro,
+  sheinLogoNegro,
+  zurichLogo,
+  volkswagenLogoNegro,
+  xiaomiLogoNegro,
+  esteeLauderLogoNegro
+} from '../../assets/images';
 import './Proyectos.scss';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -21,95 +47,119 @@ const Proyectos = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const carouselRef = useRef(null);
-  const portfolioRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  // Proyectos data
-  const projects = [
-    {
-      id: 1,
-      name: 'Alsea',
-      image: projectAlsea1,
-      challenge: 'Crear una estrategia de responsabilidad social que conectara con los colaboradores de múltiples marcas.',
-      solution: 'Desarrollamos un programa integral de voluntariado y apoyo comunitario que unificó a todas las marcas bajo un propósito común.',
-      impact: [
-        '+5,000 colaboradores involucrados',
-        '150 comunidades beneficiadas',
-        '300,000 comidas donadas'
-      ],
-      tags: ['Voluntariado', 'Donativos', 'Impacto Social']
-    },
-    {
-      id: 2,
-      name: 'SHEIN',
-      image: projectShein1,
-      challenge: 'Transformar la percepción de marca a través de acciones sociales significativas.',
-      solution: 'Implementamos una campaña de apoyo a emprendedoras mexicanas en la industria textil.',
-      impact: [
-        '200 emprendedoras capacitadas',
-        '50 negocios fortalecidos',
-        '$2M MXN en apoyo directo'
-      ],
-      tags: ['Empoderamiento', 'Educación', 'Moda Sostenible']
-    },
-    {
-      id: 3,
-      name: 'ZURICH',
-      image: projectZurich1,
-      challenge: 'Conectar los valores corporativos con acciones tangibles de impacto social.',
-      solution: 'Creamos un programa de educación financiera para comunidades vulnerables.',
-      impact: [
-        '10,000 personas capacitadas',
-        '25 comunidades alcanzadas',
-        '85% mejora en hábitos financieros'
-      ],
-      tags: ['Educación Financiera', 'Inclusión', 'Bienestar']
-    },
-    {
-      id: 4,
-      name: 'VOLKSWAGEN',
-      image: projectVolkswagen1,
-      challenge: 'Fortalecer el compromiso ambiental de la marca con acciones locales.',
-      solution: 'Desarrollamos un programa de reforestación y movilidad sostenible.',
-      impact: [
-        '50,000 árboles plantados',
-        '100 colaboradores voluntarios',
-        '500 hectáreas reforestadas'
-      ],
-      tags: ['Medio Ambiente', 'Voluntariado', 'Sostenibilidad']
-    },
-    {
-      id: 5,
-      name: 'xiaomi',
-      image: projectAlsea2,
-      challenge: 'Democratizar el acceso a la tecnología en comunidades marginadas.',
-      solution: 'Implementamos centros de tecnología comunitarios con capacitación digital.',
-      impact: [
-        '15 centros tecnológicos',
-        '5,000 jóvenes capacitados',
-        '80% empleabilidad mejorada'
-      ],
-      tags: ['Tecnología', 'Educación', 'Inclusión Digital']
-    },
-    {
-      id: 6,
-      name: 'ESTÉE LAUDER',
-      image: projectShein2,
-      challenge: 'Apoyar a mujeres en situación vulnerable a través del empoderamiento.',
-      solution: 'Creamos un programa de capacitación en belleza y emprendimiento.',
-      impact: [
-        '1,000 mujeres capacitadas',
-        '300 emprendimientos creados',
-        '70% aumento en ingresos'
-      ],
-      tags: ['Empoderamiento Femenino', 'Belleza', 'Emprendimiento']
-    }
-  ];
-
+  // Proyectos data with white logos
+ const projects = [
+  {
+    id: 1,
+    name: 'ALSEA',
+    logo: alseaLogoBlanco,
+    image: projectAlsea1,
+    galleryImages: [
+      projectAlsea1,
+      projectAlsea2,
+      projectAlsea3,
+      projectAlsea4,
+      projectShein1
+    ],
+    partnerLogo: alseaLogoNegro,
+    description: 'Va x mi cuenta es una fundación creada por Alsea que combate la desnutrición infantil en México. Su misión es ofrecer alimentación balanceada a niños en situación vulnerable, además de promover programas de salud y educación nutricional.',
+    brandColor: '#E94B3F',
+    arrowColor: '#9EC9EF',
+    tags: ['Voluntariado', 'Donativos', 'Impacto Social']
+  },
+  {
+    id: 2,
+    name: 'SHEIN',
+    logo: sheinLogoBlanco,
+    image: projectShein1,
+    galleryImages: [
+      projectShein1,
+      projectShein2,
+      projectShein3,
+      projectShein4
+    ],
+    partnerLogo: sheinLogoNegro,
+    description: 'SHEIN se compromete con el desarrollo social a través del apoyo a emprendedoras mexicanas, fortaleciendo la industria textil local con programas de capacitación y financiamiento.',
+    brandColor: '#FFC2C2',
+    arrowColor: '#E94B3F',
+    tags: ['Empoderamiento', 'Educación', 'Moda Sostenible']
+  },
+  {
+    id: 3,
+    name: 'ZURICH',
+    logo: zurichLogoBlanco,
+    image: projectZurich1,
+    galleryImages: [
+      projectZurich1,
+      projectZurich3,
+      projectZurich4,
+      projectZurich5
+    ],
+    partnerLogo: zurichLogo,
+    description: 'Zurich Seguros promueve la educación financiera y la cultura de prevención en México, ayudando a familias vulnerables a construir un futuro más seguro y estable.',
+    brandColor: '#66C2BA',
+    arrowColor: '#403d39',
+    tags: ['Educación Financiera', 'Inclusión', 'Bienestar']
+  },
+  {
+    id: 4,
+    name: 'VOLKSWAGEN',
+    logo: volkswagenLogoBlanco,
+    image: projectVolkswagen1,
+    galleryImages: [
+      projectVolkswagen1,
+      projectVolkswagen2,
+      projectVolkswagen3,
+      projectVolkswagen4,
+      projectVolkswagen5
+    ],
+    partnerLogo: volkswagenLogoNegro,
+    description: 'Volkswagen lidera iniciativas ambientales en México, comprometidos con la movilidad sostenible y la restauración de ecosistemas para las futuras generaciones.',
+    brandColor: '#9EC9EF',
+    arrowColor: '#000000',
+    tags: ['Medio Ambiente', 'Voluntariado', 'Sostenibilidad']
+  },
+  {
+    id: 5,
+    name: 'XIAOMI',
+    logo: xiaomiLogoBlanco || null,
+    image: projectAlsea2,
+    galleryImages: [
+      projectAlsea2,
+      projectShein3,
+      projectVolkswagen2,
+      projectZurich3
+    ],
+    partnerLogo: xiaomiLogoNegro,
+    description: 'Xiaomi democratiza el acceso a la tecnología en comunidades marginadas de México, creando centros de innovación y capacitación digital para jóvenes.',
+    brandColor: '#FE973B',
+    arrowColor: '#000000',
+    tags: ['Tecnología', 'Educación', 'Inclusión Digital']
+  },
+  {
+    id: 6,
+    name: 'ESTÉE LAUDER',
+    logo: esteeLauderLogoBlanco || null,
+    image: projectShein2,
+    galleryImages: [
+      projectShein2,
+      projectAlsea3,
+      projectZurich4,
+      projectVolkswagen3
+    ],
+    partnerLogo: esteeLauderLogoNegro,
+    description: 'Estée Lauder Companies empodera a mujeres mexicanas a través de programas de belleza y emprendimiento, transformando vidas con educación y oportunidades de negocio.',
+    brandColor: '#E8D9EC',
+    arrowColor: '#E94B3F',
+    tags: ['Empoderamiento Femenino', 'Belleza', 'Emprendimiento']
+  }
+];
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Title animation
@@ -155,8 +205,8 @@ const Proyectos = () => {
         }
       );
 
-      // Portfolio items animation
-      gsap.fromTo('.proyectos__item',
+      // Brand items animation
+      gsap.fromTo('.proyectos__brand',
         { opacity: 0, scale: 0.9 },
         {
           opacity: 1,
@@ -166,7 +216,7 @@ const Proyectos = () => {
           ease: 'power3.out',
           delay: 0.8,
           scrollTrigger: {
-            trigger: '.proyectos__portfolio',
+            trigger: '.proyectos__brands',
             start: 'top 80%'
           }
         }
@@ -201,14 +251,14 @@ const Proyectos = () => {
   const animateSlide = (newSlide) => {
     setIsAnimating(true);
     
-    gsap.to('.proyectos__item', {
+    gsap.to('.proyectos__brand', {
       opacity: 0,
       scale: 0.95,
       duration: 0.3,
       stagger: 0.05,
       onComplete: () => {
         setCurrentSlide(newSlide);
-        gsap.fromTo('.proyectos__item',
+        gsap.fromTo('.proyectos__brand',
           { opacity: 0, scale: 0.95 },
           { 
             opacity: 1, 
@@ -252,33 +302,39 @@ const Proyectos = () => {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-<div 
-  ref={portfolioRef}
-  className="proyectos__portfolio"
->
-  {getVisibleProjects().map((project) => (
-    <div
-      key={project.id}
-      className="proyectos__item"
-      onClick={() => handleProjectClick(project)}
-    >
-      <img 
-        src={project.image} 
-        alt={project.name}
-        className="proyectos__image"
-      />
-      <div className="proyectos__info">
-        <span className="proyectos__tag">{project.name}</span>
-        {project.tags && project.tags[0] && (
-          <span className="proyectos__tag proyectos__tag--category">{project.tags[0]}</span>
-        )}
-      </div>
-      <div className="proyectos__overlay">
-        <h3 className="proyectos__name">{project.name}</h3>
-      </div>
-    </div>
-  ))}
-</div>
+          <div className="proyectos__brands">
+            {getVisibleProjects().map((project) => (
+              <div
+                key={project.id}
+                className="proyectos__brand"
+                onClick={() => handleProjectClick(project)}
+              >
+                <div className="proyectos__brand-container">
+                  {/* Background image */}
+                  <div 
+                    className="proyectos__brand-bg" 
+                    style={{ backgroundImage: `url(${project.image})` }}
+                  />
+                  
+                  {/* Glass overlay */}
+                  <div className="proyectos__brand-overlay" />
+                  
+                  {/* Brand logo or text */}
+                  <div className="proyectos__brand-content">
+                    {project.logo ? (
+                      <img 
+                        src={project.logo} 
+                        alt={project.name}
+                        className="proyectos__brand-logo"
+                      />
+                    ) : (
+                      <h3 className="proyectos__brand-name">{project.name}</h3>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
           {/* Navigation arrows */}
           <button 

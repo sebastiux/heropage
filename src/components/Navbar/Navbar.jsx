@@ -25,10 +25,15 @@ const Navbar = () => {
     }
   };
 
+  const handleLogoClick = () => {
+    // Abrir en nueva pestaña
+    window.open('https://sebastiux.github.io/purpleclone/', '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar__container container">
-        <div className="navbar__logo">
+        <div className="navbar__logo" onClick={handleLogoClick}>
           <img src={logohgroup} alt="H Group" />
         </div>
         

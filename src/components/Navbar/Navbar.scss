@@ -1,4 +1,7 @@
 // src/components/Navbar/Navbar.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
 .navbar {
   position: fixed;
   top: 0;
@@ -24,10 +27,24 @@
 
   &__logo {
     cursor: pointer;
+    transition: transform $transition-base;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
     
     img {
       height: 35px;
       width: auto;
+      transition: opacity $transition-base;
+    }
+
+    &:hover img {
+      opacity: 0.8;
     }
   }
 

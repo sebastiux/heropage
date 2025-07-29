@@ -15,15 +15,7 @@ import visbyCFExtraBoldWoff from './VisbyCF-ExtraBold.woff';
 import visbyCFHeavy from './VisbyCF-Heavy.woff2';
 import visbyCFHeavyWoff from './VisbyCF-Heavy.woff';
 
-// Gilroy fonts
-import gilroyThin from './Gilroy-Thin.woff2';
-import gilroyThinWoff from './Gilroy-Thin.woff';
-import gilroyRegular from './Gilroy-Regular.woff2';
-import gilroyRegularWoff from './Gilroy-Regular.woff';
-import gilroyMedium from './Gilroy-Medium.woff2';
-import gilroyMediumWoff from './Gilroy-Medium.woff';
-import gilroyBold from './Gilroy-Bold.woff2';
-import gilroyBoldWoff from './Gilroy-Bold.woff';
+
 
 export {
   // Visby CF
@@ -40,14 +32,5 @@ export {
   visbyCFExtraBold,
   visbyCFExtraBoldWoff,
   visbyCFHeavy,
-  visbyCFHeavyWoff,
-  // Gilroy
-  gilroyThin,
-  gilroyThinWoff,
-  gilroyRegular,
-  gilroyRegularWoff,
-  gilroyMedium,
-  gilroyMediumWoff,
-  gilroyBold,
-  gilroyBoldWoff
+  visbyCFHeavyWoff
 };

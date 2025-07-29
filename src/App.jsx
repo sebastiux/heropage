@@ -6,11 +6,12 @@ import Hero from './sections/Hero';
 import Servicios from './sections/Servicios';
 import Fundaciones from './sections/Fundaciones';
 import Proyectos from './sections/Proyectos';
-import Aliados from './sections/Aliados'; // Uncomment this
-//import Footer from './sections/Footer';
+import Aliados from './sections/Aliados';
+import Footer from './sections/Footer'; // Add this import
 import './App.scss';
 
 function App() {
+  
   return (
     <LanguageProvider>
       <div className="app">
@@ -20,11 +21,12 @@ function App() {
           <Servicios />
           <Fundaciones />
           <Proyectos />
-          <Aliados /> {/* Add this */}
+          <Aliados />
+          <Footer />
         </main>
       </div>
     </LanguageProvider>
   );
 }
 
-export default App;
+export default App;;

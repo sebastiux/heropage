@@ -8,7 +8,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 9999;
   display: none;
   align-items: center;
@@ -20,310 +20,389 @@
     background-color: $white;
     max-width: 1200px;
     width: 100%;
-    max-height: 90vh;
+    height: 85vh;
+    max-height: 700px;
     position: relative;
     overflow: hidden;
-    border-radius: $radius-md;
-    transform: scale(0.8);
+    transform: scale(0.9);
     opacity: 0;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   }
 
   &__close {
     position: absolute;
-    top: 3rem;
-    right: 3rem;
-    width: 35px;
-    height: 35px;
+    top: 2rem;
+    right: 2rem;
+    width: 40px;
+    height: 40px;
     background: none;
     border: none;
     cursor: pointer;
     z-index: 10;
-    transition: transform $transition-base;
+    font-size: 3rem;
+    font-family: 'VisbyCF', sans-serif;
+    color: $black;
+    transition: all $transition-base;
 
     &:hover {
       transform: rotate(90deg);
     }
-
-    span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 25px;
-      height: 2px;
-      background-color: $black;
-      transition: background-color $transition-base;
-
-      &:first-child {
-        transform: translate(-50%, -50%) rotate(45deg);
-      }
-
-      &:last-child {
-        transform: translate(-50%, -50%) rotate(-45deg);
-      }
-    }
-
-    @include responsive(mobile) {
-      top: 1.5rem;
-      right: 1.5rem;
-      width: 30px;
-      height: 30px;
-
-      span {
-        width: 20px;
-      }
-    }
   }
 
-  &__grid {
+  &__container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 90vh;
+    grid-template-columns: 65% 35%;
+    height: 100%;
 
     @include responsive(tablet) {
       grid-template-columns: 1fr;
-      height: auto;
-      max-height: 90vh;
-      overflow-y: auto;
     }
   }
 
-  &__image {
-    position: relative;
+  &__left {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color $transition-base;
     overflow: hidden;
-    background-color: $black;
-    opacity: 0;
-    transform: translateX(-50px);
-    aspect-ratio: 1; // FORZAR proporción cuadrada
 
+    @include responsive(tablet) {
+      padding: 1.5rem;
+    }
+
+    @include responsive(mobile) {
+      padding: 1rem;
+    }
+  }
+
+  &__images {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    // Patrones específicos para cada distribución
+    &.pattern-single {
+      .project-modal__row {
+        height: 100%;
+      }
+    }
+
+    &.pattern-duo {
+      .project-modal__row {
+        height: 100%;
+        gap: 0.5rem;
+      }
+    }
+
+    &.pattern-trio {
+      .project-modal__row {
+        height: 100%;
+        gap: 0.5rem;
+      }
+    }
+
+    &.pattern-quad {
+      .project-modal__row {
+        height: calc(50% - 0.25rem);
+      }
+    }
+
+    &.pattern-penta {
+      .project-modal__row {
+        &:first-child {
+          height: 60%;
+        }
+        &:last-child {
+          height: calc(40% - 0.5rem);
+        }
+      }
+    }
+
+    &.pattern-hexa {
+      .project-modal__row {
+        height: calc(50% - 0.25rem);
+      }
+    }
+
+    &.pattern-septa {
+      .project-modal__row {
+        &:first-child {
+          height: 55%;
+        }
+        &:last-child {
+          height: calc(45% - 0.5rem);
+        }
+      }
+    }
+
+    &.pattern-octa {
+      .project-modal__row {
+        height: calc(33.333% - 0.333rem);
+        
+        &:nth-child(2) {
+          height: calc(33.333% - 0.334rem);
+        }
+      }
+    }
+
+    &.pattern-nona,
+    &.pattern-grid {
+      .project-modal__row {
+        height: calc(33.333% - 0.333rem);
+      }
+    }
+
+    &.pattern-deca,
+    &.pattern-undeca,
+    &.pattern-dodeca {
+      .project-modal__row {
+        flex: 1;
+      }
+    }
+  }
+
+  &__row {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+
+    // Ajustes específicos basados en el número de imágenes en la fila
+    &[data-images="1"] {
+      .project-modal__image-wrapper {
+        width: 100%;
+      }
+    }
+
+    &[data-images="2"] {
+      .project-modal__image-wrapper {
+        width: calc(50% - 0.25rem);
+      }
+    }
+
+    &[data-images="3"] {
+      .project-modal__image-wrapper {
+        width: calc(33.333% - 0.333rem);
+      }
+    }
+
+    &[data-images="4"] {
+      .project-modal__image-wrapper {
+        width: calc(25% - 0.375rem);
+      }
+    }
+
+    &[data-images="5"] {
+      .project-modal__image-wrapper {
+        width: calc(20% - 0.4rem);
+      }
+    }
+  }
+
+  &__image-wrapper {
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba($white, 0.1);
+    position: relative;
+    border-radius: 4px;
+    
     img {
       width: 100%;
       height: 100%;
-      object-fit: fill; // FUERZA que la imagen se estire para llenar exactamente el contenedor
+      object-fit: cover;
+      object-position: center;
+      display: block;
       transition: transform $transition-slow;
-    }
 
-    &:hover img {
-      transform: scale(1.05);
-    }
-
-    @include responsive(tablet) {
-      aspect-ratio: 16/9; // Proporción diferente para tablets
-      min-height: 300px;
-    }
-
-    @include responsive(mobile) {
-      aspect-ratio: 4/3; // Proporción para móvil
-      min-height: 200px;
-    }
-  }
-
-  &__image-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.3) 100%
-    );
-    pointer-events: none;
-  }
-
-  &__info {
-    padding: 5rem;
-    overflow-y: auto;
-    max-height: 90vh;
-    
-    // Custom scrollbar
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    &::-webkit-scrollbar-track {
-      background: rgba($chrome-white, 0.3);
-      border-radius: 3px;
-    }
-    
-    &::-webkit-scrollbar-thumb {
-      background: $chrome-white;
-      border-radius: 3px;
-      
       &:hover {
-        background: darken($chrome-white, 10%);
+        transform: scale(1.05);
       }
     }
+  }
 
-    // Firefox
-    scrollbar-width: thin;
-    scrollbar-color: $chrome-white rgba($chrome-white, 0.3);
-    
+  &__right {
+    background-color: $white;
+    padding: 4rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
     @include responsive(tablet) {
-      padding: 4rem 3rem;
-    }
-
-    @include responsive(mobile) {
       padding: 3rem 2rem;
     }
 
-    > * {
-      opacity: 0;
-      transform: translateY(30px);
+    @include responsive(mobile) {
+      padding: 2rem 1.5rem;
     }
   }
 
-  &__title {
-    font-family: $font-primary;
-    font-size: clamp(3rem, 4vw, 5rem);
-    font-weight: map-get($visby-weights, 'bold');
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+  &__info {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  &__logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    width: 100%;
+
+    @include responsive(mobile) {
+      flex-direction: column;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__company-logo {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+    max-width: 280px;
+    
+    @include responsive(tablet) {
+      height: 80px;
+      max-width: 240px;
+    }
+    
+    @include responsive(mobile) {
+      height: 60px;
+      max-width: 200px;
+    }
+  }
+
+  &__partner-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    max-width: 240px;
+    opacity: 0.9;
+    
+    @include responsive(tablet) {
+      height: 60px;
+      max-width: 200px;
+    }
+    
+    @include responsive(mobile) {
+      height: 50px;
+      max-width: 160px;
+    }
+  }
+
+  &__description {
+    font-family: 'VisbyCF', sans-serif;
+    font-size: 1.7rem;
+    line-height: 1.7;
     color: $black;
-    margin-bottom: 2rem;
-    line-height: 1.1;
-  }
-
-  &__divider {
-    width: 100px;
-    height: 4px;
-    background-color: map-get($colors, 'hope');
-    margin-bottom: 4rem;
-    border-radius: 2px;
-  }
-
-  &__details {
-    margin-bottom: 4rem;
-  }
-
-  &__detail {
-    margin-bottom: 3rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    h4 {
-      font-family: $font-primary;
-      font-size: 1.8rem;
-      font-weight: map-get($visby-weights, 'demi-bold');
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: $black;
-      margin-bottom: 1.2rem;
-      padding-bottom: 0.8rem;
-      border-bottom: 1px solid rgba($chrome-white, 0.5);
-    }
+    text-align: left;
+    font-weight: 400;
+    width: 100%;
 
     p {
-      font-family: $font-secondary;
-      font-size: 1.6rem;
-      line-height: 1.8;
-      color: $masala;
+      margin: 0;
+      font-family: 'VisbyCF', sans-serif;
+    }
+
+    @include responsive(mobile) {
+      font-size: 1.5rem;
+      line-height: 1.6;
     }
   }
 
-  &__impact-list {
-    list-style: none;
-    padding: 0;
+  // Responsive
+  @include responsive(tablet) {
+    &__content {
+      height: 90vh;
+      max-height: none;
+    }
 
-    li {
-      font-family: $font-secondary;
-      font-size: 1.6rem;
-      line-height: 1.8;
-      color: $masala;
-      padding-left: 2.5rem;
-      position: relative;
-      margin-bottom: 1rem;
+    &__container {
+      grid-template-columns: 1fr;
+      grid-template-rows: 60% 40%;
+    }
 
-      &:last-child {
-        margin-bottom: 0;
+    &__images {
+      // Ajustes específicos para tablet
+      &.pattern-penta,
+      &.pattern-septa {
+        .project-modal__row {
+          height: calc(50% - 0.25rem) !important;
+        }
       }
 
-      &::before {
-        content: '•';
-        position: absolute;
-        left: 0;
-        color: map-get($colors, 'hope');
-        font-size: 2rem;
-        line-height: 1.4;
+      &.pattern-octa,
+      &.pattern-nona,
+      &.pattern-grid {
+        .project-modal__row {
+          height: calc(33.333% - 0.333rem) !important;
+        }
       }
     }
   }
 
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 3rem;
-    padding-top: 3rem;
-    border-top: 1px solid rgba($chrome-white, 0.5);
-  }
-
-  &__tag {
-    font-family: $font-primary;
-    font-size: 1.2rem;
-    font-weight: map-get($visby-weights, 'regular');
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: $black;
-    padding: 0.8rem 2rem;
-    border: 1px solid $chrome-white;
-    border-radius: 25px;
-    transition: all $transition-base;
-    white-space: nowrap;
-
-    &:hover {
-      background-color: $black;
-      color: $white;
-      border-color: $black;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  // Responsive adjustments
   @include responsive(mobile) {
     padding: 1rem;
 
     &__content {
-      border-radius: $radius-sm;
+      height: 95vh;
     }
 
-    &__title {
+    &__close {
+      top: 1rem;
+      right: 1rem;
+      width: 35px;
+      height: 35px;
       font-size: 2.5rem;
-      margin-bottom: 1.5rem;
     }
 
-    &__divider {
-      margin-bottom: 2rem;
-    }
+    &__images {
+      gap: 0.25rem;
 
-    &__detail {
-      margin-bottom: 2rem;
-
-      h4 {
-        font-size: 1.6rem;
+      // Para móvil, simplificar a máximo 2 columnas
+      .project-modal__row {
+        &[data-images="3"],
+        &[data-images="4"],
+        &[data-images="5"] {
+          flex-wrap: wrap;
+          
+          .project-modal__image-wrapper {
+            width: calc(50% - 0.125rem);
+            height: 50%;
+          }
+        }
       }
-
-      p {
-        font-size: 1.4rem;
-      }
     }
+  }
+}
 
-    &__impact-list li {
-      font-size: 1.4rem;
-      padding-left: 2rem;
-    }
+// Animaciones especiales para ciertas distribuciones
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
-    &__tags {
-      gap: 0.8rem;
-    }
-
-    &__tag {
-      font-size: 1.1rem;
-      padding: 0.6rem 1.5rem;
+.project-modal__image-wrapper {
+  animation: fadeInScale 0.5s ease-out forwards;
+  
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
     }
   }
 }

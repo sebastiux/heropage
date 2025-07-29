@@ -51,189 +51,155 @@
     }
   }
 
-  // SOLUCIÓN: Una sola fila con flexbox
-  &__portfolio {
+  &__brands {
     display: flex;
-    width: 100%;
-    height: 400px; // Altura fija para la fila
-    
-    @include responsive(desktop) {
-      height: 350px;
-    }
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
 
     @include responsive(tablet) {
-      height: 300px;
+      gap: 1.5rem;
+      min-height: 350px;
     }
 
     @include responsive(mobile) {
-      height: 250px;
+      gap: 1rem;
+      min-height: 300px;
+      flex-wrap: wrap;
     }
   }
 
-  // Cada item ocupa exactamente 1/6 del ancho
-  &__item {
-    position: relative;
+  &__brand {
+    flex: 1;
+    max-width: 200px;
     cursor: pointer;
-    overflow: hidden;
-    transition: transform $transition-base;
     opacity: 0;
     transform: scale(0.9);
-    
-    // CLAVE: Flex para una sola fila
-    flex: 1; // Cada item ocupa el mismo espacio
-    width: calc(100% / 6); // Exactamente 1/6
-    height: 100%; // Ocupa toda la altura del contenedor
-    
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-    
-    @include responsive(desktop) {
-      width: calc(100% / 4);
-    }
+    transition: all $transition-base;
+    height: 100%;
 
-    @include responsive(tablet) {
-      width: calc(100% / 3);
-    }
-
-    @include responsive(mobile) {
-      width: calc(100% / 2);
-    }
-    
     &:hover {
-      z-index: 2;
-      transform: translateY(-5px);
+      .proyectos__brand-container {
+        transform: translateY(-10px);
+        border-color: rgba($black, 0.3);
+        box-shadow: 
+          0 20px 40px rgba(0, 0, 0, 0.15);
+      }
 
-      .proyectos__image {
+      .proyectos__brand-bg {
+        transform: scale(1.1);
+        filter: grayscale(0%) brightness(1.2);
+      }
+
+      .proyectos__brand-overlay {
+        opacity: 0.6;
+      }
+
+      .proyectos__brand-name {
         transform: scale(1.05);
       }
-
-      .proyectos__overlay {
-        opacity: 1;
-      }
-
-      .proyectos__info {
-        opacity: 0;
-      }
     }
-
-    @include responsive(mobile) {
-      &:hover {
-        transform: translateY(-2px);
-      }
-    }
-  }
-
-  // La imagen llena completamente su contenedor
-  &__image {
-    width: 100%;
-    height: 100%;
-    
-    // SOLUCIÓN: object-fit cover para llenar sin distorsión
-    object-fit: cover;
-    object-position: center;
-    
-    transition: transform $transition-slow;
-    display: block;
-    
-    margin: 0;
-    padding: 0;
-    border: none;
-    outline: none;
-  }
-
-  &__info {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    z-index: 3;
-    transition: opacity $transition-base;
-
-    @include responsive(mobile) {
-      top: 15px;
-      left: 15px;
-      gap: 6px;
-    }
-  }
-
-  &__tag {
-    font-family: $font-primary;
-    font-size: 0.75rem;
-    font-weight: map-get($visby-weights, 'demi-bold');
-    color: $black;
-    background-color: $white;
-    padding: 8px 15px;
-    border-radius: 25px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    line-height: 1;
-    white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: all $transition-base;
-    margin: 0;
-    border: none;
-
-    &--category {
-      background-color: rgba(map-get($colors, 'hope'), 0.9);
-      color: $black;
-    }
-
-    &:hover {
-      background-color: #f0f0f0;
-      transform: scale(1.05);
-    }
-
-    @include responsive(mobile) {
-      font-size: 0.65rem;
-      padding: 5px 10px;
-    }
-  }
-
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.3) 50%,
-      rgba(0, 0, 0, 0.8) 100%
-    );
-    display: flex;
-    align-items: flex-end;
-    padding: 2rem;
-    opacity: 0;
-    transition: opacity $transition-base;
 
     @include responsive(tablet) {
-      padding: 1.5rem;
+      max-width: 150px;
     }
 
     @include responsive(mobile) {
-      padding: 1.2rem;
-      opacity: 0;
+      max-width: 120px;
+      flex: 0 0 calc(50% - 0.5rem);
     }
   }
 
-  &__name {
-    font-family: $font-primary;
-    font-size: clamp(1.4rem, 1.8vw, 2.2rem);
-    font-weight: map-get($visby-weights, 'bold');
-    color: $white;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-align: left;
-    line-height: 1.2;
-    width: 100%;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  &__brand-container {
+    position: relative;
+    height: 350px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba($black, 0.15);
+    transition: all $transition-base;
+    background: transparent;
+
+    @include responsive(tablet) {
+      height: 280px;
+    }
 
     @include responsive(mobile) {
-      font-size: 1.3rem;
-      text-align: center;
+      height: 220px;
+    }
+  }
+
+  &__brand-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: grayscale(100%) brightness(0.5);
+    transition: all $transition-slow;
+    transform: scale(1);
+  }
+
+  &__brand-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($black, 0.7);
+    transition: all $transition-base;
+    opacity: 0.8;
+  }
+
+  &__brand-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 2;
+  }
+
+  &__brand-name {
+    font-family: $font-primary;
+    font-size: 2.2rem;
+    font-weight: map-get($visby-weights, 'bold');
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: $white;
+    text-align: center;
+    transition: all $transition-base;
+    transform: scale(1);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+
+    @include responsive(tablet) {
+      font-size: 1.8rem;
+    }
+
+    @include responsive(mobile) {
+      font-size: 1.4rem;
+    }
+  }
+
+  // Add logo styles here - INSIDE the .proyectos block
+  &__brand-logo {
+    max-width: 150px;
+    max-height: 80px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(1.2);
+
+    @include responsive(tablet) {
+      max-width: 120px;
+      max-height: 60px;
+    }
+
+    @include responsive(mobile) {
+      max-width: 100px;
+      max-height: 50px;
     }
   }
 

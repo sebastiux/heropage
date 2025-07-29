@@ -25,6 +25,10 @@ import alseaLogoNegro from './Alsealogo_Negro.png';
 import alseaLogoBlanco from './Alsealogo_Blanco.png';
 import sheinLogoBlanco from './Sheinlogo_blanco.png';
 import sheinLogoNegro from './Sheinlogo_negro.png';
+import xiaomiLogoBlanco from './Xiaomilogo_blanco.png';
+import xiaomiLogoNegro from './Xiaomilogo_negro.png';
+import esteeLauderLogoBlanco from './EsteeLauderlogo_blanco.png';
+import esteeLauderLogoNegro from './EsteeLauderlogo_negro.png';
 
 // Export all logos
 export {
@@ -49,5 +53,9 @@ export {
   alseaLogoNegro,
   alseaLogoBlanco,
   sheinLogoNegro,
-  sheinLogoBlanco
+  sheinLogoBlanco,
+  xiaomiLogoBlanco,
+  xiaomiLogoNegro,
+  esteeLauderLogoBlanco,
+  esteeLauderLogoNegro
 };
