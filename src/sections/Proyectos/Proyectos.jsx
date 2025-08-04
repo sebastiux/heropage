@@ -9,6 +9,7 @@ import {
   projectAlsea2,
   projectAlsea3,
   projectAlsea4,
+  projectAlsea5,
   projectShein1,
   projectShein2,
   projectShein3,
@@ -65,7 +66,7 @@ const Proyectos = () => {
       projectAlsea2,
       projectAlsea3,
       projectAlsea4,
-      projectShein1
+      projectAlsea5
     ],
     partnerLogo: alseaLogoNegro,
     description: 'Va x mi cuenta es una fundación creada por Alsea que combate la desnutrición infantil en México. Su misión es ofrecer alimentación balanceada a niños en situación vulnerable, además de promover programas de salud y educación nutricional.',

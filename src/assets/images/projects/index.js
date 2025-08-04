@@ -5,6 +5,7 @@ import projectAlsea1 from './ALSEA1.png';
 import projectAlsea2 from './ALSEA2.png';
 import projectAlsea3 from './ALSEA3.png';
 import projectAlsea4 from './Alsea4.png';
+import projectAlsea5 from './ALSEA5.jpg';
 
 // SHEIN project images
 import projectShein from './SHEIN_Proyectos.png';
@@ -34,6 +35,7 @@ export {
   projectAlsea2,
   projectAlsea3,
   projectAlsea4,
+  projectAlsea5,
   projectShein1,
   projectShein2,
   projectShein3,

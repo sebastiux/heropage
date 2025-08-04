@@ -11,20 +11,7 @@
     margin-bottom: 6rem;
   }
 
-  &__title {
-    font-family: $font-primary;
-    font-size: clamp(3rem, 5vw, 4.5rem);
-    font-weight: 400;
-    letter-spacing: 0.15em;
-    margin-bottom: 4rem;
-    color: $black;
-    padding: 1.5rem 4rem;
-    border: 2px solid $black;
-    border-radius: 50px;
-    display: inline-block;
-    text-transform: uppercase;
-  }
-
+ 
   &__line {
     width: 100%;
     max-width: 1400px;
@@ -65,16 +52,16 @@
   }
 
   &__counter {
-    font-family: $font-primary;
+    font-family: $font-primary; // CORREGIDO: Era $visby-weights
     font-size: clamp(5rem, 8vw, 8rem);
-    font-weight: map-get($visby-weights, 'bold');
+    font-weight: map-get($visby-weights, 'bold'); // Esto sí está correcto - obtiene el valor 700
     color: $black;
     display: block;
     line-height: 1;
   }
 
   &__counter-text {
-    font-family: $font-primary;
+    font-family: $font-primary; // Correcto
     font-size: 2.5rem;
     font-weight: 300;
     letter-spacing: 0.2em;
@@ -141,9 +128,9 @@
   }
 
   &__category-label {
-    font-family: $font-primary;
+    font-family: $font-primary; // Correcto
     font-size: 1.2rem;
-    font-weight: map-get($visby-weights, 'regular');
+    font-weight: map-get($visby-weights, 'regular'); // Correcto - obtiene 400
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: $black;
@@ -151,4 +138,19 @@
     max-width: 150px;
     margin: 0 auto;
   }
+  // Agrega esto al final de Fundaciones.scss
+.fundaciones-title-fix {
+  font-family: 'VisbyCF', sans-serif !important;
+  font-size: clamp(3rem, 5vw, 4.5rem) !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.15em !important;
+  margin-bottom: 4rem !important;
+  color: #000 !important;
+  padding: 1.5rem 4rem !important;
+  border: 2px solid #000 !important;
+  border-radius: 50px !important;
+  display: inline-block !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+}
 }

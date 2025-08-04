@@ -93,16 +93,35 @@ const Fundaciones = () => {
   ];
 
   useEffect(() => {
+    // Verificar qué fuente está aplicada
+    const title = document.querySelector('.fundaciones-title-fix');
+    if (title) {
+      const styles = window.getComputedStyle(title);
+      console.log('Fundaciones title styles:', {
+        fontFamily: styles.fontFamily,
+        fontWeight: styles.fontWeight,
+        fontSize: styles.fontSize
+      });
+      
+      // Verificar si la fuente está cargada
+      document.fonts.ready.then(() => {
+        const fontLoaded = document.fonts.check('400 1em VisbyCF');
+        console.log('VisbyCF Regular loaded:', fontLoaded);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate title
-      gsap.fromTo('.fundaciones__title',
+      // Animate title - CAMBIO AQUÍ
+      gsap.fromTo('.fundaciones-title-fix',
         { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
           duration: 1,
           scrollTrigger: {
-            trigger: '.fundaciones__title',
+            trigger: '.fundaciones-title-fix',
             start: 'top 80%',
           }
         }
@@ -191,7 +210,7 @@ const Fundaciones = () => {
     <section className="fundaciones" id="fundaciones" ref={sectionRef}>
       <div className="container">
         <div className="fundaciones__header">
-          <h2 className="fundaciones__title">FUNDACIONES</h2>
+          <h2 className="fundaciones-title-fix">FUNDACIONES</h2>
           <div className="fundaciones__line"></div>
         </div>
 
@@ -228,13 +247,13 @@ const Fundaciones = () => {
       </div>
 
       {activeCategory && (
-  <CategoryModal
-    category={activeCategory}
-    isOpen={isModalOpen}
-    onClose={handleCloseModal}
-    data-category={activeCategory.id}
-  />
-)}
+        <CategoryModal
+          category={activeCategory}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          data-category={activeCategory.id}
+        />
+      )}
     </section>
   );
 };

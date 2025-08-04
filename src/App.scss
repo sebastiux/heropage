@@ -1,4 +1,5 @@
 // src/App.scss
+@import './styles/abstracts/variables';
 * {
   margin: 0;
   padding: 0;
@@ -32,7 +33,6 @@ body {
   padding: 0 2rem;
 }
 
-// All text elements use Visby
 h1, h2, h3, h4, h5, h6, p, a, span, button, input, textarea, select {
-  font-family: 'VisbyCF';
+  font-family: 'VisbyCF', sans-serif;  // ← Con fallback
 }

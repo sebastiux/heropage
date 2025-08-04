@@ -7,11 +7,11 @@ import Servicios from './sections/Servicios';
 import Fundaciones from './sections/Fundaciones';
 import Proyectos from './sections/Proyectos';
 import Aliados from './sections/Aliados';
-import Footer from './sections/Footer'; // Add this import
+import Footer from './sections/Footer';
+import './styles/main.scss'; // Add this import
 import './App.scss';
 
 function App() {
-  
   return (
     <LanguageProvider>
       <div className="app">
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default App;;
+export default App;
