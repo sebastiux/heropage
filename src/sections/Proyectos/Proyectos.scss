@@ -7,32 +7,62 @@
   background-color: $white;
   position: relative;
 
+  @include responsive(mobile) {
+    padding: 5rem 0;
+    overflow-x: hidden;
+  }
+
+  // Container override para móvil
+  .container {
+    @include responsive(mobile) {
+      padding: 0;
+      max-width: 100%;
+      overflow-x: visible;
+    }
+  }
+
   &__header {
     text-align: center;
     margin-bottom: 6rem;
+
+    @include responsive(mobile) {
+      margin-bottom: 3rem;
+      padding: 0 2rem;
+    }
   }
 
   &__title {
     font-family: $font-primary;
-    font-size: clamp(3rem, 5vw, 5rem);
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    margin-bottom: 3rem;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    margin-bottom: 4rem;
     color: $black;
-    
-    padding: 2rem 4rem;
+    padding: 1.5rem 4rem;
     border: 2px solid $black;
     border-radius: 50px;
     display: inline-block;
+    text-transform: uppercase;
+
+    @include responsive(mobile) {
+      font-size: 2.5rem;
+      padding: 1rem 2rem;
+      margin-bottom: 2rem;
+    }
   }
 
   &__line {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1400px;
     height: 3px;
     background-color: map-get($colors, 'hope');
     margin: 0 auto;
     transform-origin: center;
+
+    @include responsive(mobile) {
+      height: 2px;
+      width: 90%;
+    }
   }
 
   &__carousel {
@@ -47,7 +77,11 @@
     }
 
     @include responsive(mobile) {
-      padding: 0 4rem;
+      max-width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+      padding: 0;
+      overflow: visible;
     }
   }
 
@@ -64,9 +98,27 @@
     }
 
     @include responsive(mobile) {
-      gap: 1rem;
-      min-height: 300px;
-      flex-wrap: wrap;
+      // Estilo Instagram Stories para móvil
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: stretch;
+      gap: 0;
+      min-height: 70vh;
+      max-height: 600px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding: 0;
+      
+      // Ocultar scrollbar
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
@@ -79,35 +131,46 @@
     transition: all $transition-base;
     height: 100%;
 
-    &:hover {
-      .proyectos__brand-container {
-        transform: translateY(-10px);
-        border-color: rgba($black, 0.3);
-        box-shadow: 
-          0 20px 40px rgba(0, 0, 0, 0.15);
-      }
-
-      .proyectos__brand-bg {
-        transform: scale(1.1);
-        filter: grayscale(0%) brightness(1.2);
-      }
-
-      .proyectos__brand-overlay {
-        opacity: 0.6;
-      }
-
-      .proyectos__brand-name {
-        transform: scale(1.05);
-      }
-    }
-
     @include responsive(tablet) {
       max-width: 150px;
     }
 
     @include responsive(mobile) {
-      max-width: 120px;
-      flex: 0 0 calc(50% - 0.5rem);
+      // Estilo Instagram Story para móvil
+      flex: 0 0 100vw;
+      width: 100vw;
+      max-width: 100vw;
+      height: 100%;
+      min-height: 70vh;
+      max-height: 600px;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      opacity: 1;
+      transform: none;
+      position: relative;
+    }
+
+    &:hover {
+      @media (hover: hover) and (min-width: 769px) {
+        .proyectos__brand-container {
+          transform: translateY(-10px);
+          border-color: rgba($black, 0.3);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .proyectos__brand-bg {
+          transform: scale(1.1);
+          filter: grayscale(0%) brightness(1.2);
+        }
+
+        .proyectos__brand-overlay {
+          opacity: 0.6;
+        }
+
+        .proyectos__brand-name {
+          transform: scale(1.05);
+        }
+      }
     }
   }
 
@@ -125,7 +188,11 @@
     }
 
     @include responsive(mobile) {
-      height: 220px;
+      border-radius: 0;
+      border: none;
+      height: 100%;
+      min-height: 70vh;
+      max-height: 600px;
     }
   }
 
@@ -140,6 +207,12 @@
     filter: grayscale(100%) brightness(0.5);
     transition: all $transition-slow;
     transform: scale(1);
+
+    @include responsive(mobile) {
+      filter: none;
+      background-size: cover;
+      background-position: center center;
+    }
   }
 
   &__brand-overlay {
@@ -150,60 +223,193 @@
     background: rgba($black, 0.7);
     transition: all $transition-base;
     opacity: 0.8;
+
+    @include responsive(mobile) {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.2) 40%,
+        rgba(0, 0, 0, 0.4) 70%,
+        rgba(0, 0, 0, 0.8) 100%
+      );
+      opacity: 1;
+    }
   }
 
   &__brand-content {
-    position: relative;
-    height: 100%;
-    display: flex;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  z-index: 2;
+
+  @include responsive(mobile) {
+    flex-direction: column;
+    justify-content: center; // Cambiado de flex-end a center
     align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    z-index: 2;
+    padding: 3rem; // Padding uniforme
+  }
+}
+
+
+&__brand-logo {
+  max-width: 150px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(1.2);
+
+  @include responsive(tablet) {
+    max-width: 120px;
+    max-height: 60px;
   }
 
-  &__brand-name {
-    font-family: $font-primary;
-    font-size: 2.2rem;
-    font-weight: map-get($visby-weights, 'bold');
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: $white;
-    text-align: center;
-    transition: all $transition-base;
-    transform: scale(1);
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+  @include responsive(mobile) {
+    max-width: 250px; // Más grande para móvil
+    max-height: 120px; // Más altura
+    filter: brightness(0) invert(1);
+    margin-bottom: 0; // Sin margen inferior
+  }
+}
 
-    @include responsive(tablet) {
-      font-size: 1.8rem;
-    }
+ &__brand-name {
+  font-family: $font-primary;
+  font-size: 2.2rem;
+  font-weight: map-get($visby-weights, 'bold');
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: $white;
+  text-align: center;
+  transition: all $transition-base;
+  transform: scale(1);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+
+  @include responsive(tablet) {
+    font-size: 1.8rem;
+  }
+
+  @include responsive(mobile) {
+    font-size: 2.8rem; // Más grande en móvil
+    margin-bottom: 0; // Sin margen
+  }
+}
+
+  &__brand-description {
+    display: none;
 
     @include responsive(mobile) {
+      display: block;
+      font-family: $font-primary;
       font-size: 1.4rem;
+      line-height: 1.6;
+      color: $white;
+      text-align: center;
+      font-weight: 300;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
   }
 
-  // Add logo styles here - INSIDE the .proyectos block
-  &__brand-logo {
-    max-width: 150px;
-    max-height: 80px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    filter: brightness(1.2);
-
-    @include responsive(tablet) {
-      max-width: 120px;
-      max-height: 60px;
-    }
+  // Progress bars estilo Instagram (solo móvil)
+  &__progress {
+    display: none;
 
     @include responsive(mobile) {
-      max-width: 100px;
-      max-height: 50px;
+      display: flex;
+      position: absolute;
+      top: -2rem;
+      left: 1rem;
+      right: 1rem;
+      gap: 0.5rem;
+      z-index: 10;
     }
   }
 
-  // Navigation arrows
+  &__progress-bar {
+    flex: 1;
+    height: 3px;
+    background-color: rgba($black, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+    
+    &-fill {
+      height: 100%;
+      background-color: map-get($colors, 'hope');
+      width: 0;
+      transition: width 0.3s ease;
+    }
+
+    &--active &-fill {
+      width: 100%;
+    }
+  }
+
+  // Navegación con dots (solo móvil)
+  &__navigation {
+    display: none;
+
+    @include responsive(mobile) {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 2rem;
+      padding: 1rem;
+    }
+  }
+
+  &__nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba($black, 0.3);
+    cursor: pointer;
+    transition: all $transition-base;
+    border: none;
+    padding: 0;
+
+    &--active {
+      background-color: map-get($colors, 'hope');
+      transform: scale(1.5);
+    }
+
+    &:hover {
+      background-color: rgba($black, 0.5);
+    }
+  }
+
+  // Indicadores de swipe (solo móvil)
+  &__swipe-hint {
+    display: none;
+
+    @include responsive(mobile) {
+      display: flex;
+      position: absolute;
+      bottom: 50%;
+      transform: translateY(50%);
+      left: 2rem;
+      right: 2rem;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 5;
+      animation: fadeInOut 3s ease-in-out infinite;
+    }
+
+    &-arrow {
+      width: 40px;
+      height: 40px;
+      opacity: 0.8;
+      
+      svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+      }
+    }
+  }
+
+  // Navegación para desktop
   &__nav {
     position: absolute;
     top: 50%;
@@ -219,6 +425,10 @@
     @include flex-center;
     color: $black;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+    @include responsive(mobile) {
+      display: none;
+    }
 
     svg {
       width: 28px;
@@ -236,62 +446,33 @@
     &.disabled {
       opacity: 0.5;
       cursor: not-allowed;
-      
-      &:hover {
-        transform: translateY(-50%);
-        background-color: $white;
-        color: $black;
-      }
     }
 
     &--prev {
       left: 2rem;
-
-      @include responsive(tablet) {
-        left: 1.5rem;
-      }
-
-      @include responsive(mobile) {
-        left: 1rem;
-        width: 50px;
-        height: 50px;
-        
-        svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
     }
 
     &--next {
       right: 2rem;
-
-      @include responsive(tablet) {
-        right: 1.5rem;
-      }
-
-      @include responsive(mobile) {
-        right: 1rem;
-        width: 50px;
-        height: 50px;
-        
-        svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
     }
   }
+}
 
+// Animaciones
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 0.8;
+  }
+}
+
+// Clase helper para prevenir scroll del body en móvil
+.no-scroll {
   @include responsive(mobile) {
-    padding: 8rem 0;
-
-    &__header {
-      margin-bottom: 4rem;
-    }
-
-    &__title {
-      padding: 1.5rem 3rem;
-    }
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
   }
 }

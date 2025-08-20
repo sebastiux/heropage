@@ -27,7 +27,7 @@ const Navbar = () => {
 
   const handleLogoClick = () => {
     // Abrir en nueva pestaña
-    window.open('https://sebastiux.github.io/purpleclone/', '_blank', 'noopener,noreferrer');
+    window.open('https://hgroup.consulting/', '_blank', 'noopener,noreferrer');
   };
 
   return (

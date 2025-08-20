@@ -54,7 +54,7 @@
   &__counter {
     font-family: $font-primary; // CORREGIDO: Era $visby-weights
     font-size: clamp(5rem, 8vw, 8rem);
-    font-weight: map-get($visby-weights, 'bold'); // Esto sí está correcto - obtiene el valor 700
+    font-weight: 700; // Esto sí está correcto - obtiene el valor 700
     color: $black;
     display: block;
     line-height: 1;
@@ -129,8 +129,8 @@
 
   &__category-label {
     font-family: $font-primary; // Correcto
-    font-size: 1.2rem;
-    font-weight: map-get($visby-weights, 'regular'); // Correcto - obtiene 400
+    font-size: 1.6rem;
+    font-weight: 350; 
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: $black;

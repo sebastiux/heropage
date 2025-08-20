@@ -27,7 +27,7 @@ const Footer = () => {
   const whatsappNumber = '5217202533388'; 
 
   // Google Maps URL for the location
-  const googleMapsUrl = "https://www.google.com/maps/place/Blvd.+Palmas+Hills+1,+Valle+de+las+Palmas,+52787+Naucalpan+de+Ju%C3%A1rez,+M%C3%A9x./@19.4492,-99.2086,17z";
+  const googleMapsUrl = "https://www.google.com/maps/place/Blvd.+Palmas+Hills+1,+Valle+de+las+Palmas,+52787+Naucalpan+de+Ju%C3%A1rez,+M%C3%A9x./@19.3925333,-99.2809451,17z/data=!3m1!4b1!4m6!3m5!1s0x85d206cd0ecf99d7:0x5cf8cf0df97e7401!8m2!3d19.3925333!4d-99.2809451!16s%2Fg%2F11xh2zvqk1";
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -271,19 +271,35 @@ _Enviado desde el formulario de contacto de HERO`;
             </form>
           </div>
 
-          <div className="footer__right">
-            <div className="footer__map-container">
+       <div className="footer__right">
+            <div 
+              className="footer__map-container"
+              onClick={handleAddressClick}
+              role="button"
+              tabIndex={0}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleAddressClick();
+                }
+              }}
+              aria-label="Ver ubicación en Google Maps"
+            >
               <div className="footer__map" ref={mapRef}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.1397!2d-99.2086!3d19.4492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d20200b0000000%3A0x0!2sBlvd.%20Palmas%20Hills%201%2C%20Piso%2021!5e0!3m2!1ses!2smx!4v1647891234567!5m2!1ses!2smx"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="H Group Location"
-                ></iframe>
+                <div className="footer__map-inner">
+                  <iframe
+                    src="https://maps.google.com/maps?q=Blvd.+Palmas+Hills+1,+Valle+de+las+Palmas,+52787+Naucalpan+de+Juarez&t=&z=16&ie=UTF8&iwloc=B&output=embed&disableDefaultUI=true"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="H Group Location"
+                    frameBorder="0"
+                    tabIndex={-1}
+                  ></iframe>
+                </div>
+                <div className="footer__map-click-overlay"></div>
               </div>
             </div>
 

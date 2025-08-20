@@ -51,8 +51,8 @@
 
   &__title {
     font-family: $font-primary;
-    font-size: clamp(3.5rem, 5vw, 5rem);
-    font-weight: map-get($visby-weights, 'regular');
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 350;
     line-height: 1.2;
     margin-bottom: 1rem;
     color: $black;
@@ -61,7 +61,7 @@
   &__subtitle {
     font-family: $font-primary;
     font-size: clamp(2rem, 3vw, 2.8rem);
-    font-weight: map-get($visby-weights, 'regular');
+    font-weight: 300;
     margin-bottom: 4rem;
     color: $black;
   }
@@ -245,7 +245,7 @@
       border-radius: 50%;
       border: 3px solid rgba($chrome-white, 0.3);
       pointer-events: none;
-      z-index: 1;
+      z-index: 10;
     }
   }
 
@@ -255,41 +255,106 @@
     border-radius: 50%;
     overflow: hidden;
     position: relative;
+    background: $white;
     
     iframe {
-      width: 120%;
-      height: 120%;
+      width: 140%;
+      height: 1110%;
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 45%;
+      left: 48%;
       transform: translate(-50%, -50%);
       filter: grayscale(20%);
       transition: filter $transition-base;
+      // Permitir interacción con el mapa
+      pointer-events: auto;
       
       &:hover {
         filter: grayscale(0%);
       }
     }
+    
+    // Overlay solo para el logo de Google - esquina inferior izquierda
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      width: 90px;
+      height: 25px;
+      background: $white;
+      z-index: 2;
+      pointer-events: none;
+      border-radius: 5px;
+    }
+  }
+  
+  // Overlay para cubrir texto "Centrar" en la parte superior
+  &__map-top-overlay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: $white;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 5px;
   }
 
+  // Overlay para cubrir controles del lado derecho
+  &__map-right-overlay {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 60px;
+    background: $white;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 5px;
+  }
+  
+  // Overlay clickeable
+  &__map-click-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: 5;
+    cursor: pointer;
+  }
+  // Overlay adicional para cubrir el borde derecho
+  &__map-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 100%;
+    background: $white;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
   &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
     text-align: center;
-    max-width: 400px;
+    width: 100%;
   }
 
   &__logo {
-    width: 180px;
-    margin: 0 auto 2.5rem;
-
+    width: 150px;
+    
     img {
       width: 100%;
       height: auto;
-      filter: brightness(0);
-      transition: filter $transition-base;
-      
-      &:hover {
-        filter: brightness(0) opacity(0.7);
-      }
     }
   }
 

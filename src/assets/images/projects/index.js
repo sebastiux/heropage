@@ -1,11 +1,11 @@
 // src/assets/images/projects/index.js
 
 // Alsea project images
-import projectAlsea1 from './ALSEA1.png';
-import projectAlsea2 from './ALSEA2.png';
+import projectAlsea1 from './AlseaHERO5.png';
+import projectAlsea2 from './AlseaHERO4.png';
 import projectAlsea3 from './ALSEA3.png';
 import projectAlsea4 from './Alsea4.png';
-import projectAlsea5 from './ALSEA5.jpg';
+import projectAlsea5 from './AlseaHERO6.jpg';
 
 // SHEIN project images
 import projectShein from './SHEIN_Proyectos.png';
@@ -20,6 +20,13 @@ import projectVolkswagen2 from './VOLKSWAGEN2.png';
 import projectVolkswagen3 from './VOLKSWAGEN3.png';
 import projectVolkswagen4 from './VOLKSWAGEN4.png';
 import projectVolkswagen5 from './VOLKSWAGEN5.png';
+
+// XIAOMI project images
+import projectXiaomi0 from './XiaomiPortada.png';
+import projectXiaomi1 from './Xiaomi1.jpg';
+import projectXiaomi2 from './Xiaomi2.jpg';
+import projectXiaomi3 from './Xiaomi3.jpg';
+
 
 // Zurich project images
 import projectZurich1 from './Zurich1.jpg';
@@ -45,6 +52,10 @@ export {
   projectVolkswagen3,
   projectVolkswagen4,
   projectVolkswagen5,
+  projectXiaomi0,
+  projectXiaomi1,
+  projectXiaomi2,
+  projectXiaomi3,
   projectZurich1,
   projectZurich3,
   projectZurich4,

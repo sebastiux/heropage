@@ -58,7 +58,6 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
   const galleryImages = project.galleryImages || [];
   const imageCount = galleryImages.length;
 
-  // Función inteligente para determinar la distribución de las imágenes
   const getImageDistribution = (count) => {
     const distributions = {
       1: { rows: [1], pattern: 'single' },
@@ -78,10 +77,8 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
     return distributions[count] || { rows: [], pattern: 'grid' };
   };
 
-  // Obtener la distribución para el número actual de imágenes
   const distribution = getImageDistribution(imageCount);
   
-  // Crear un array de arrays basado en la distribución
   const getImageRows = () => {
     const rows = [];
     let imageIndex = 0;
@@ -117,10 +114,7 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
 
         <div className="project-modal__container">
           {/* Left side - Image Gallery */}
-          <div 
-            className="project-modal__left"
-            style={{ backgroundColor: project.brandColor || '#E94B3F' }}
-          >
+          <div className="project-modal__left">
             <div 
               className={`project-modal__images pattern-${distribution.pattern}`}
               data-count={imageCount}
@@ -148,17 +142,11 @@ const ProjectModal = ({ project, isOpen, onClose }) => {
           <div className="project-modal__right">
             <div className="project-modal__info">
               <div className="project-modal__logos">
-                {project.logo && (
-                  <img 
-                    src={project.logo} 
-                    alt={project.name} 
-                    className="project-modal__company-logo"
-                  />
-                )}
+                {/* Solo mostrar el logo de la empresa si existe */}
                 {project.partnerLogo && (
                   <img 
                     src={project.partnerLogo} 
-                    alt="Partner" 
+                    alt={project.name} 
                     className="project-modal__partner-logo"
                   />
                 )}

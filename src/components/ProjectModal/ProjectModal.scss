@@ -63,7 +63,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color $transition-base;
+    background-color: rgba($chrome-white, 0.05); // Fondo muy sutil en lugar de color sólido
     overflow: hidden;
 
     @include responsive(tablet) {
@@ -168,7 +168,6 @@
     gap: 0.5rem;
     width: 100%;
 
-    // Ajustes específicos basados en el número de imágenes en la fila
     &[data-images="1"] {
       .project-modal__image-wrapper {
         width: 100%;
@@ -203,9 +202,10 @@
   &__image-wrapper {
     height: 100%;
     overflow: hidden;
-    background-color: rgba($white, 0.1);
+    background-color: $white;
     position: relative;
-    border-radius: 4px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     
     img {
       width: 100%;
@@ -228,9 +228,12 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    border-left: 1px solid rgba($chrome-white, 0.3);
 
     @include responsive(tablet) {
       padding: 3rem 2rem;
+      border-left: none;
+      border-top: 1px solid rgba($chrome-white, 0.3);
     }
 
     @include responsive(mobile) {
@@ -269,6 +272,7 @@
     width: auto;
     object-fit: contain;
     max-width: 280px;
+    filter: brightness(0); // Logos en negro
     
     @include responsive(tablet) {
       height: 80px;
@@ -286,7 +290,7 @@
     width: auto;
     object-fit: contain;
     max-width: 240px;
-    opacity: 0.6;
+    opacity: 0.8;
     
     @include responsive(tablet) {
       height: 60px;
@@ -300,7 +304,8 @@
   }
 
   &__description {
-    font-family: 'VisbyCF', sans-serif;
+    font-family: $font-primary;
+    font-weight: 300;
     font-size: 1.7rem;
     line-height: 1.7;
     color: $black;
@@ -310,7 +315,7 @@
 
     p {
       margin: 0;
-      font-family: 'VisbyCF', sans-serif;
+      font-family: $font-primary;
     }
 
     @include responsive(mobile) {
@@ -332,7 +337,6 @@
     }
 
     &__images {
-      // Ajustes específicos para tablet
       &.pattern-penta,
       &.pattern-septa {
         .project-modal__row {
@@ -368,7 +372,6 @@
     &__images {
       gap: 0.25rem;
 
-      // Para móvil, simplificar a máximo 2 columnas
       .project-modal__row {
         &[data-images="3"],
         &[data-images="4"],
@@ -385,7 +388,7 @@
   }
 }
 
-// Animaciones especiales para ciertas distribuciones
+// Animaciones
 @keyframes fadeInScale {
   from {
     opacity: 0;
