@@ -24,20 +24,16 @@
     margin-right: auto;
     line-height: 1.6;
   }
-
+//Standard
   &__title {
     font-family: $font-primary;
-    font-size: clamp(3rem, 5vw, 5rem);
+    font-size: 3.8rem;
     font-weight: 300;
     letter-spacing: 0.1em;
     margin-bottom: 3rem;
     color: $black;
     
-    padding: 2rem 4rem;
-    border: 2px solid $black;
-    border-radius: 50px;
-    display: inline-block;
-    text-transform: uppercase;
+  
   }
 
   &__line {

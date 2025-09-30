@@ -24,7 +24,7 @@ const Footer = () => {
   const [errors, setErrors] = useState({});
 
   // WhatsApp number for H Group (Mexico format)
-  const whatsappNumber = '5217202533388'; 
+  const whatsappNumber = '5215619933412'; 
 
   // Google Maps URL for the location
   const googleMapsUrl = "https://www.google.com/maps/place/Blvd.+Palmas+Hills+1,+Valle+de+las+Palmas,+52787+Naucalpan+de+Ju%C3%A1rez,+M%C3%A9x./@19.3925333,-99.2809451,17z/data=!3m1!4b1!4m6!3m5!1s0x85d206cd0ecf99d7:0x5cf8cf0df97e7401!8m2!3d19.3925333!4d-99.2809451!16s%2Fg%2F11xh2zvqk1";
